@@ -32,6 +32,7 @@ if(ANDROID)
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
   )
 else()
   add_executable(airport_inspector
@@ -39,6 +40,7 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    resources.qrc
   )
 endif()
 
