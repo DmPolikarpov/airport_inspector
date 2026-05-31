@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
 
 if(ANDROID)
   add_library(airport_inspector SHARED
@@ -33,6 +33,8 @@ if(ANDROID)
     mainwindow.h
     mainwindow.ui
     resources.qrc
+    DatabaseManager.h
+    DatabaseManager.cpp
   )
 else()
   add_executable(airport_inspector
@@ -41,7 +43,16 @@ else()
     mainwindow.h
     mainwindow.ui
     resources.qrc
+    DatabaseManager.h
+    DatabaseManager.cpp
   )
 endif()
 
-target_link_libraries(airport_inspector PRIVATE Qt5::Widgets)
+target_link_libraries(airport_inspector PRIVATE Qt5::Widgets Qt5::Sql)
+
+file(GLOB DB_DLLS "${CMAKE_CURRENT_SOURCE_DIR}/libs/*.dll")
+add_custom_command(TARGET airport_inspector POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${DB_DLLS}
+    $<TARGET_FILE_DIR:airport_inspector>
+)
