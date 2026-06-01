@@ -32,5 +32,6 @@ private slots:
     void onConnectionStatusChanged(bool connected, const QString &errorMsg);
 
     void on_btnShowSchedule_clicked();
+    void on_btnShowStats_clicked();
 };
 #endif // MAINWINDOW_H

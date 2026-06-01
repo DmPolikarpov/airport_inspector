@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "statisticsdialog.h"
 
 #include <QMessageBox>
 
@@ -110,4 +111,13 @@ void MainWindow::on_btnShowSchedule_clicked()
         ui->tableSchedule->setItem(row, 2, new QTableWidgetItem(query.value(2).toString()));
         row++;
     }
+}
+
+void MainWindow::on_btnShowStats_clicked()
+{
+    QString code = airportCodes[ui->cbAirports->currentText()];
+    QString name = ui->cbAirports->currentText();
+
+    StatisticsDialog dialog(code, name, dbManager, this);
+    dialog.exec();
 }
