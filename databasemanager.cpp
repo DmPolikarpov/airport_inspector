@@ -65,3 +65,27 @@ QSqlQuery DatabaseManager::getFlights(const QString &airportCode, bool isArrival
     query.exec();
     return query;
 }
+
+QSqlQuery DatabaseManager::getYearlyStats(const QString &airportCode) {
+    QSqlQuery query(db);
+    query.prepare("SELECT count(flight_no), date_trunc('month', scheduled_departure) as \"Month\" "
+                  "FROM bookings.flights f "
+                  "WHERE (scheduled_departure::date > date('2016-08-31') AND scheduled_departure::date <= date('2017-08-31')) "
+                  "AND (departure_airport = :airportCode OR arrival_airport = :airportCode) "
+                  "GROUP BY \"Month\" ORDER BY \"Month\"");
+    query.bindValue(":airportCode", airportCode);
+    query.exec();
+    return query;
+}
+
+QSqlQuery DatabaseManager::getDailyStats(const QString &airportCode) {
+    QSqlQuery query(db);
+    query.prepare("SELECT count(flight_no), date_trunc('day', scheduled_departure) as \"Day\" "
+                  "FROM bookings.flights f "
+                  "WHERE (scheduled_departure::date > date('2016-08-31') AND scheduled_departure::date <= date('2017-08-31')) "
+                  "AND (departure_airport = :airportCode OR arrival_airport = :airportCode) "
+                  "GROUP BY \"Day\" ORDER BY \"Day\"");
+    query.bindValue(":airportCode", airportCode);
+    query.exec();
+    return query;
+}

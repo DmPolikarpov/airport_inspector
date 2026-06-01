@@ -216,3 +216,34 @@ QScrollBar::handle:horizontal {
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     width: 0px;
 }
+
+/* --- Statistic window --- */
+QTabWidget::pane {
+    border: 1px solid #3A3A3A;
+    background-color: #282828;
+    top: -1px;
+}
+
+QTabBar::tab {
+    background-color: #333333;
+    color: #AAAAAA;
+    padding: 8px 20px;
+    border: 1px solid #262626;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+QTabBar::tab:hover {
+    background-color: #3D3D3D;  
+    color: #FFFFFF;   
+}
+
+QTabBar::tab:selected {
+    background-color: #282828;  
+    color: #E07A1F;  
+    border-color: #3A3A3A;    
+    border-bottom: 1px solid #282828; 
+}

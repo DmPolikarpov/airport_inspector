@@ -24,11 +24,11 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="yearlyTab">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>Год</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
@@ -38,7 +38,7 @@
      </widget>
      <widget class="QWidget" name="monthlyTab">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Месяц</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>

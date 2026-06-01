@@ -4,7 +4,9 @@
 #include <QDialog>
 #include <QtCharts/QChartView>
 #include <QtCharts/QChart>
-#include "DatabaseManager.h"
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QLineSeries>
+#include "databasemanager.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -20,16 +22,25 @@ public:
     StatisticsDialog(const QString &airportCode, const QString &airportName, DatabaseManager *db, QWidget *parent = nullptr);
     ~StatisticsDialog();
 
+private slots:
+    void updateMonthlyChart(int monthIndex);
+
+    void on_cbMonths_currentIndexChanged(int index);
+
+    void on_btnClose_clicked();
+
 private:
     Ui::StatisticsDialog *ui;
 
-    void setupYearlyTab();
-    void setupMonthlyTab();
+    void setupYearlyTab(const QString &code);
+    void setupMonthlyTab(const QString &code);
+
+    void applyDarkThemeToChart(QChart *chart);
 
     DatabaseManager *dbManager;
 
     // Cache daily data to avoid DB spam when changing combobox
-    QMap<int, QVector<int>> dailyStatsCache;
+    int dailyStatsCache[13][32];
 };
 
 #endif // STATISTICSDIALOG_H
